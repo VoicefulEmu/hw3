@@ -64,27 +64,41 @@ def pingpong(n):
     True
     """
 
-    def helper_func(n, dirx, i):
-        if i == 0:
-            return 1
+    # def helper_func(n, output,dirx, i):
+    #     if i == n:
+    #         return output
+    #     else:
+    #         if dirx:
+    #             return dirx_func(dirx, output, i)
+    #         else:
+    #             return - 1 - dirx_func(dirx, i)
+    # def dirx_func(dirx, output, i):
+    #     if i % 8 == 0 or num_eights(i):
+    #         return helper_func(n, output, not dirx, i + 1) 
+    #     else:
+    #         return helper_func(n, output, dirx, i + 1)   
+
+    def helper_func(n, output, dirx, i):
+        if i == n:
+            return output
         else:
             if dirx:
-                return 1 + dirx_func(dirx,i)
+                if i % 8 == 0 or num_eights(i):
+                    return helper_func(n,output-1, not dirx, i +1)
+                else:
+                    return helper_func(n,output +1 , dirx, i +1)  
             else:
-                return - 1 - dirx_func(dirx, i)
-    def dirx_func(dirx, i):
-        if i % 8 == 0 or num_eights(i):
-            return helper_func(n ,not dirx, i - 1) 
-        else:
-            return helper_func(n, dirx, i - 1)   
+                if i % 8 == 0 or num_eights(i):
+                    return helper_func(n,output +1, not dirx, i +1)
+                else:
+                    return helper_func(n,output -1, dirx, i +1)  
+    return helper_func(n, 1,True, 1)
 
-
-    return helper_func(n,True,n)
-
-let = pingpong(10)
-print(let)
-
-
+# x = 1
+# while x<100:
+#     let = pingpong(x)
+#     print(let)
+#     x+=1
 
 
 
