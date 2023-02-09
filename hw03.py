@@ -64,6 +64,30 @@ def pingpong(n):
     True
     """
 
+    def helper_func(n, dirx, i):
+        if i == 0:
+            return 1
+        else:
+            if dirx:
+                return 1 + dirx_func(dirx,i)
+            else:
+                return - 1 - dirx_func(dirx, i)
+    def dirx_func(dirx, i):
+        if i % 8 == 0 or num_eights(i):
+            return helper_func(n ,not dirx, i - 1) 
+        else:
+            return helper_func(n, dirx, i - 1)   
+
+
+    return helper_func(n,True,n)
+
+let = pingpong(10)
+print(let)
+
+
+
+
+
     # def movement(n):
     #     if n == 1:
     #         return 1
@@ -155,21 +179,21 @@ def missing_digits(n):
     >>> check(HW_SOURCE_FILE, 'missing_digits', ['While', 'For'])
     True
     """
-    def helper_function(n, first, last, count):
-        if n == first:
-            return count
-        else:
-            if n//10 %10 != last - 1:
-               count += 1
-               return helper_function(n-1,n // 10**(len(str(n))-1),n%10,count)
-            n = n//10
-            last = n%10
-            return helper_function(n,n // 10**(len(str(n))-1),last,count)
+#     def helper_function(n, first, last, count):
+#         if n == first:
+#             return count
+#         else:
+#             if n//10 %10 != last - 1:
+#                count += 1
+#                return helper_function(n-1,n // 10**(len(str(n))-1),n%10,count)
+#             n = n//10
+#             last = n%10
+#             return helper_function(n,n // 10**(len(str(n))-1),last,count)
             
 
-    return helper_function(n,n // 10**(len(str(n))-1),n%10,0)
-var = missing_digits(3558)
-print(var)
+#     return helper_function(n,n // 10**(len(str(n))-1),n%10,0)
+# var = missing_digits(3558)
+# print(var)
 
 def ascending_coin(coin):
     """Returns the next ascending coin in order.
