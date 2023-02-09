@@ -94,76 +94,6 @@ def pingpong(n):
                     return helper_func(n,output -1, dirx, i +1)  
     return helper_func(n, 1,True, 1)
 
-# x = 1
-# while x<100:
-#     let = pingpong(x)
-#     print(let)
-#     x+=1
-
-
-
-    # def movement(n):
-    #     if n == 1:
-    #         return 1
-    #     elif n %8 == 0 or num_eights(n):
-    #         return -movement(n - 1)
-    #     else:
-    #         return movement(n - 1)
-
-
-    # def helper_func(n, output, k):
-    #     if n == k:
-    #         return output
-    #     else:
-    #         return helper_func(n, output + movement(k + 1), k + 1)
-
-    # return helper_func(n, 1, 1)
-
-
-    # def direction(n):
-    #     if n == 1:
-    #         return 1
-    #     if n % 8 == 0 or num_eights(n):
-    #         return -direction(n - 1)
-    #     return direction(n - 1)
-
-    # def pingpong_helper(n, i, d):
-    #     if n == i:
-    #         return d
-    #     return pingpong_helper(n, i + 1, d + direction(i + 1))
-
-    # return pingpong_helper(n, 1, 1)
-
-
-
-
-    
-
-
-
-#     direction = True
-#     counter = 0
-#     k = 1
-#     while k <= n:
-
-#         if direction:
-#             counter += 1
-#         else:
-#             counter -= 1
-#         print(counter)
-#         if k % 8 == 0 or num_eights(k):
-#             if direction == True:
-#                 direction = False
-#             else:
-#                 direction = True   
-#         k += 1     
-#     return counter
-        
-# ans = pingpong(100)
-# print(ans)
-            
-
-
 
 
 def missing_digits(n):
@@ -193,6 +123,27 @@ def missing_digits(n):
     >>> check(HW_SOURCE_FILE, 'missing_digits', ['While', 'For'])
     True
     """
+
+
+    first = int(str(n)[0])
+    last = int(str(n)[-1])
+    current = int(str(n)[-1])
+    def helper_func(n, first, current, count):
+        if current == first:
+            return count
+        else:
+            if int(str(n)[-2]) != int(str(n)[-1]):
+                count += (int(str(n)[-1]) - int(str(n)[-2])) - 1
+                n = n//10
+                return helper_func(n,int(str(n)[0]),int(str(n)[-1]),count)
+            else:
+                n = n//10
+                return helper_func(n,int(str(n)[0]),int(str(n)[-1]),count)
+
+    return helper_func(n, first, current, 0)
+            
+
+
 #     def helper_function(n, first, last, count):
 #         if n == first:
 #             return count
