@@ -194,6 +194,8 @@ def descending_coin(coin):
         return 5
     elif coin == 5:
         return 1
+    else:
+        return 0
 
 
 def count_coins(change):
@@ -213,16 +215,21 @@ def count_coins(change):
     >>> check(HW_SOURCE_FILE, 'count_coins', ['While', 'For'])
     True
     """
-    if change == 0:
-        return 0 
-    elif change > 0:
-        return 0
-    elif change == 0:
-        return 0
-    else:
-        with_m = count_coins(n-m, m)
-        without_m = count_coins(n, m-1)
-        return with_m + without_m
+
+    def helper_func(change_n, coin_m):
+        if change_n == 0:
+            return 1
+        elif change_n < 0:
+            return 0
+        elif coin_m == 0:
+            return 0
+        else:
+            with_coin = helper_func(change_n - coin_m, coin_m)
+            without_coin = helper_func(change_n, descending_coin(coin_m))
+            return with_coin + without_coin
+
+    return helper_func(change ,25)
+
 
 
 def print_move(origin, destination):
